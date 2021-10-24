@@ -1,0 +1,92 @@
+{% extends 'dashboard.html'%} {% load static %} {% load crispy_forms_tags %} {%
+{%block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Item List</title>
+    <style>
+      .table {
+        font-size: 13px;
+        text-align: center;
+        width: 95%;
+        margin: auto;
+        text-align: center;
+      }
+
+      /*Make alternating colors for the table rows*/
+      .table tr:nth-child(odd) {
+        background: #b8cae4;
+      }
+
+      .table tr:nth-child(even) {
+        background: #dae5f4;
+      }
+
+      th {
+        background-color: #337ab7;
+        color: white;
+      }
+
+      .display_table {
+        border-bottom-right-radius: 20px;
+        /*border-bottom-left-radius: 20px;*/
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 20px;
+        box-shadow: 12px 12px 20px 6px #2e6da4;
+      }
+
+      .header {
+        font-family: helvetica;
+        color: #337ab7;
+        font-size: 50px;
+        text-align: center;
+        width: 100%;
+        text-shadow: 6px 6px 6px #c9c6c6;
+        display: block;
+        font-weight: bolder;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="{% url 'add_items'%}"><input type="submit" value="Ajouter nouveau produit"
+    /></a>
+    <div class="header">{{header}}</div>
+    <form method="POST" action="">
+      {% csrf_token %} {{form|crispy}}
+      <input type="submit" value="Search" />
+    </form>
+    <br />
+    <div class="display_table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Code Fournisseur</th>
+            <th>Libellé</th>
+            <th>Rayon</th>
+            <th>Quantité</th>
+            <th>Date d'expiration</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        {% for instance in queryset %}
+        <tr>
+          <td>{{instance.code_fournisseur}}</td>
+          <td>{{instance.libelle}}</td>
+          <td>{{instance.rayon}}</td>
+          <td>{{instance.quantity}}</td>
+          <td>{{instance.expire_date}}</td>
+          <td>
+            <a href="{% url 'update_items' instance.id %}">Mettre à jour</a>
+          </td>
+          <td><a href="{% url 'delete_items' instance.id %}">Supprimer</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
+
+{%endblock%}

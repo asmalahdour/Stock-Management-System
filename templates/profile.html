@@ -1,0 +1,37 @@
+{% extends 'dashboard.html' %}
+{% load static%}
+{% block content%}
+
+
+<style>
+
+    .info {
+        display: flex;
+        padding: 20px;
+    }
+
+    .form-row {
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="border border-dark rounded-lg mx-auto mt-3 " style="width:600px">
+
+        <div class="container mt-3 ">
+            <div class="mx-auto text-center info">
+                <h2> Profile - {{ user.Profile.name }} </h2>
+            </div>
+
+
+
+            {{form.as_p}}
+
+            <input class="btn btn-primary" type="submit" value="Update" name="Update">
+</form>
+
+{% endblock content %}

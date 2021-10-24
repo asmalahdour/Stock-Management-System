@@ -1,0 +1,383 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+
+    <!-- <script src="{% static 'jquery.js' %}"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--------BOX ICONS-------->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    <!--------CSS-------->
+
+
+    <title>US</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
+
+        /*===== VARIABLES CSS Y SASS =====*/
+        /*Varibles sass*/
+        /*Variables css*/
+        /*===== Colores =====*/
+        :root {
+            --first-color: #12192C;
+            --second-color: #cfe459;
+            --white-color: #EDEDED;
+        }
+
+        /*===== Fuente y tipografia =====*/
+        :root {
+            --body-font: 'Quicksand', sans-serif;
+            --small-font-size: 0.875rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            :root {
+                --small-font-size: 0.938rem;
+            }
+        }
+
+        /*===== z index =====*/
+        :root {
+            --z-back: -10;
+            --z-normal: 1;
+            --z-tooltip: 10;
+            --z-fixed: 100;
+            --z-modal: 1000;
+        }
+
+        /*===== BASE =====*/
+        *,
+        ::before,
+        ::after {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            margin: 0;
+            padding: 1rem 0 0 5rem;
+            font-family: var(--body-font);
+            background-color: var(--white-color);
+            -webkit-transition: .5s;
+            transition: .5s;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /*=====  NAV =====*/
+        .l-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 128px;
+            height: 100vh;
+            background-color: var(--first-color);
+            padding: 1.25rem .5rem 2rem;
+            -webkit-transition: .5s;
+            transition: .5s;
+            z-index: var(--z-fixed);
+        }
+
+        .nav {
+            height: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .nav__logo {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 .5rem;
+        }
+
+        .nav__logo-icon {
+            margin-right: 1.2rem;
+        }
+
+        .nav__logo-text {
+            color: var(--white-color);
+            font-weight: 700;
+        }
+
+        .nav__toggle {
+            position: absolute;
+            top: 1.10rem;
+            right: -.6rem;
+            width: 18px;
+            height: 18px;
+            background-color: var(--second-color);
+            border-radius: 50%;
+            font-size: 1.25rem;
+            color: var(--first-color);
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            cursor: pointer;
+            -webkit-transition: .5s;
+            transition: .5s;
+        }
+
+        .nav__link {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: .5rem;
+            margin-bottom: 1rem;
+            border-radius: .5rem;
+            color: var(--white-color);
+            -webkit-transition: .3s;
+            transition: .3s;
+        }
+
+        .nav__link:hover {
+            background-color: var(--second-color);
+            color: var(--first-color);
+        }
+
+        .nav__icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .nav__text {
+            font-weight: 700;
+        }
+
+        /*Show menu*/
+        .show {
+            width: 168px;
+        }
+
+        /*Rotate toggle*/
+        .rotate {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            -webkit-transition: .5s;
+            transition: .5s;
+        }
+
+        /*Active links menu*/
+        .active {
+            background-color: var(--second-color);
+            color: var(--first-color);
+        }
+
+        /*Add padding body*/
+        .expander {
+            padding: 1rem 0 0 12rem;
+            -webkit-transition: .5s;
+            transition: .5s;
+        }
+
+        .foo,
+        .foot {
+            margin-top: 350px;
+            width: 100%;
+            background: #12192C;
+        }
+
+        footer {
+            background-color: #12192C;
+        }
+
+        .navbar {
+            top: -20px;
+            bottom: 0;
+
+            margin: 2px;
+            margin-left: -25px;
+        }
+        .logo {
+            width: 48px;
+            margin-left:100px;
+        }
+        .navbar-expand-lg .navbar-collapse {
+            display: -ms-flexbox!important;
+            display: flex!important;
+            -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+            margin-left: 75%;
+            
+        }
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+            margin-left: 125px;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#12192C">
+        <a class="navbar-brand" style="color:#fff" href="#">
+            <img src="{% static 'images/logo.png'%}" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            {% if request.user.is_anonymous %}
+            <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login-modal" type="
+                submit">Login</button>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+
+            <button class="btn btn-outline-success my-2 my-sm-0 " data-toggle="modal" data-target="#logout-modal"
+                type="submit"><a href="#">Logout</a></button>
+
+            {% endif %}
+        </div>
+
+        <!-- Small modal -->
+
+        <div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Logout <i class="fa fa-lock"></i></h4>
+                    </div>
+                    <div class="modal-body"><i class="fa fa-question-circle"></i><span
+                            style="color: rgb(42, 187, 6);"></span>, Are you sure you
+                        want to log-off?</div>
+                    <div class="modal-footer"><a href="{% url 'logout' %}" class="btn btn-primary btn-block">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Large modal -->
+        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Logout <i class="fa fa-lock"></i></h4>
+                    </div>
+                    <div class="modal-body"><i class="fa fa-question-circle"></i><span style="color: rgb(42, 187, 6);">
+                            Are you sure you
+                            want to log-in?</div>
+                    <div class="modal-footer"><a href="{% url 'login' %}" class="btn btn-primary btn-block">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </nav>
+
+    <div class="l-navbar" id="navbar">
+        <nav class="nav">
+            <div>
+                <a href="#" class="nav__logo">
+                    <img src="assets/icons/logo.svg" alt="" class="nav__logo-icon">
+                    <span class="nav__logo-text">{{request.user}}</span>
+                </a>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-chevron-right'></i>
+                </div>
+
+                <ul class="nav__list">
+                    <a href="{% url 'list_item'%}" class="nav__link active">
+                        <i class='bx bx-grid-alt nav__icon'></i>
+                        <span class="nav__text">Home</span>
+                    </a>
+                    <a href="{% url 'fprofile'%}" class="nav__link">
+                        <i class='bx bx-bookmark nav__icon'></i>
+                        <span class="nav__text"> Profil<br> Settings </span>
+                    </a>
+                    <a href="{% url 'view_profile'%}" class="nav__link">
+                        <i class='bx bx-bookmark nav__icon'></i>
+                        <span class="nav__text"> View<br> Profil </span>
+                    </a>
+
+
+                </ul>
+            </div>
+            <a href="#" class="nav__link">
+                <i class=' bx bx-log-out-circle nav__icon'></i>
+                <span class="nav__text">Close</span>
+            </a>
+        </nav>
+    </div>
+
+
+    <div class="container">
+        {% block content %}
+
+
+        {% endblock content %}
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="{%static 'js/main.js'%} "></script>
+
+</body>
+
+</html>

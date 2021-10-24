@@ -1,0 +1,16 @@
+{% extends 'dashboard.html' %} {% load crispy_forms_tags %} {% block content%}
+
+<div class="mx-auto text-center info">
+  <h2>Profile - {{ user.Profile.name }}</h2>
+</div>
+
+<strong>Nom:</strong> {{pf.name}} <br />
+<strong>Mobile:</strong> {{pf.mobile_no}}<br />
+<strong>Poste:</strong> {{pf.poste}}<br />
+<strong>Departement:</strong> {{pf.departement}}<br />
+
+<a href="{% url 'update_profile' pf.pk %}">
+  <input class="btn btn-primary" type="submit" value="Update" name="Update" />
+</a>
+
+{% endblock content %}
